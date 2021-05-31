@@ -14,18 +14,26 @@ Radar SLAM: yeti radar odometry + ScanContext-based Loop Closing
         - iSAM2 in GTSAM is used. See `pgo/SC-A-LOAM/laserPosegraphOptimization.cpp` for the details (ps. the implementation is eqaul to [SC-A-LOAM](https://github.com/gisbi-kim/SC-A-LOAM) and it means `laserPosegraphOptimization.cpp` node is generic!)
 
 ## How to use? 
+
+### Dependencies 
+- Yeti: OpenCV and SC-PGO: GTSAM 
+
+### Steps 
+First, clone and build.
 ```
-$ # clone and build 
 $ mkdir -p ~/catkin_radarslam/src && cd ~/catkin_radarslam/src
 $ git clone https://github.com/gisbi-kim/navtech-radar-slam.git && cd ..
 $ catkin_make 
+```
+Second, 
+- Download the MulRan dataset (you need to download polar_oxford_form.zip) 
+- Change [this line in the yeti launch](https://github.com/gisbi-kim/navtech-radar-slam/blob/2921851c0735894d38998ca1a2057af2e8abbfd9/odometry/yeti_radar_odometry/launch/yeti_radar_odometry.launch#L4) to your downloaded and unzipped radar data directory path. 
 
-$ # run 
+Then, enjoy!
+```
 $ source devel/setup.bash
 $ roslaunch src/navtech-radar-slam/launch/navtech_radar_slam_mulran.launch
 ```
-- Dependencies are Yeti: OpenCV and SC-PGO: GTSAM 
-
 ## Examples 
 - The examples are from [MulRan dataset](https://sites.google.com/view/mulran-pr/home), which is suitable to evaluate the radar odometry or SLAM algorithm in complex urban sites. 
     - The MulRan dataset provides the oxford-radar-robotcar-radar data format (i.e., meta data such as ray-wise timestamps are imbedded in an radar image, [see details here](https://oxford-robotics-institute.github.io/radar-robotcar-dataset/documentation#radar))
@@ -42,7 +50,7 @@ $ roslaunch src/navtech-radar-slam/launch/navtech_radar_slam_mulran.launch
 
 ## Related papers 
 If you cite this repository, please consider below papers. 
-- Yeti open source for radar odometry: 
+- [Yeti open source](https://github.com/keenan-burnett/yeti_radar_odometry) for radar odometry: 
     ```
     @ARTICLE{burnett_ral21,
         author = {Keenan Burnett, Angela P. Schoellig, Timothy D. Barfoot},
@@ -55,7 +63,7 @@ If you cite this repository, please consider below papers.
         doi={10.1109/LRA.2021.3052439}}
     }
     ```
-- Scan Context open source for place recognition: 
+- [Scan Context open source](https://github.com/irapkaist/scancontext) for place recognition: 
     ```
     @INPROCEEDINGS { gkim-2018-iros,
         author = {Kim, Giseop and Kim, Ayoung},
@@ -66,7 +74,7 @@ If you cite this repository, please consider below papers.
         address = { Madrid }
     }
     ```
-- MulRan dataset: 
+- [MulRan dataset](https://sites.google.com/view/mulran-pr/home): 
     ```
     @INPROCEEDINGS{ gskim-2020-mulran, 
         TITLE={MulRan: Multimodal Range Dataset for Urban Place Recognition}, 
