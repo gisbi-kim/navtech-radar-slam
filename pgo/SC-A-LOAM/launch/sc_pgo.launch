@@ -1,0 +1,11 @@
+<launch>
+    
+    <param name="keyframe_meter_gap" type="double" value="0.2"/> <!-- SC-A-LOAM -->
+    <param name="sc_dist_thres" type="double" value="0.45"/> <!-- SC-A-LOAM, if want no outliers, use 0.1-0.15 -->
+
+    <remap from="/velodyne_cloud_registered_local" to="/yeti_cloud_local"/>
+    <remap from="/aft_mapped_to_init" to="/yeti_odom"/>            
+
+    <node pkg="sc_pgo" type="alaserPGO" name="alaserPGO" output="screen" />
+
+</launch>

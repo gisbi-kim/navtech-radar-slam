@@ -1,0 +1,14 @@
+<launch>
+    
+    <!-- use your path -->
+    <!-- <param name="seq_dir" type="string" value="USE_YOUR_PATH" />  -->
+    <param name="seq_dir" type="string" value="/media/user/888aec20-5827-4647-942b-6f0b7f024fc3/data/MulRan/mulran-icra20/ICRA20_MULRAN/Riverside/20190823_reverse/" /> 
+    
+    <node pkg="yeti" type="yetiOdom" name="yetiOdom" output="screen" />
+
+    <arg name="rviz" default="true" />
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find yeti)/rviz/yeti_pgo_rviz.rviz" />
+    </group>
+
+</launch>

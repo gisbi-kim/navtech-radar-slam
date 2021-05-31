@@ -1,0 +1,6 @@
+<launch>
+
+    <include file="$(find yeti)/launch/yeti_radar_odometry.launch" />
+    <include file="$(find sc_pgo)/launch/sc_pgo.launch" />
+
+</launch>
