@@ -30,12 +30,12 @@ $ roslaunch src/navtech-radar-slam/launch/navtech_radar_slam_mulran.launch
 - The examples are from [MulRan dataset](https://sites.google.com/view/mulran-pr/home), which is suitable to evaluate the radar odometry or SLAM algorithm in complex urban sites. 
     - The MulRan dataset provides the oxford-radar-robotcar-radar data format (i.e., meta data such as ray-wise timestamps are imbedded in an radar image, [see details here](https://oxford-robotics-institute.github.io/radar-robotcar-dataset/documentation#radar))
 
-1. KAIST 03 of MulRan dataset
+### 1. KAIST 03 of MulRan dataset
 - [Video (youtube link)](https://www.youtube.com/watch?v=avtIQ8fesgU&t=107s)  
 - Capture:
     <p align="center"><img src="pic/example1.png" width=800></p>
 
-2. Riverside 03 of MulRan dataset 
+### 2. Riverside 03 of MulRan dataset 
 - [Video (youtube link)](https://youtu.be/-wVfbrtlRAI?t=301)  
 - Capture:
     <p align="center"><img src="pic/example2.png" width=800></p>
