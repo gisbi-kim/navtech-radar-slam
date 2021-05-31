@@ -33,12 +33,12 @@ $ roslaunch src/navtech-radar-slam/launch/navtech_radar_slam_mulran.launch
 ### 1. KAIST 03 of MulRan dataset
 - [Video (youtube link)](https://www.youtube.com/watch?v=avtIQ8fesgU&t=107s)  
 - Capture:
-    <p align="center"><img src="pic/example1.png" width=800></p>
+    <p align="center"><img src="pic/example1.png" width=700></p>
 
 ### 2. Riverside 03 of MulRan dataset 
 - [Video (youtube link)](https://youtu.be/-wVfbrtlRAI?t=301)  
 - Capture:
-    <p align="center"><img src="pic/example2.png" width=800></p>
+    <p align="center"><img src="pic/example2.png" width=700></p>
 
 ## Related papers 
 If you cite this repository, please consider below papers. 
