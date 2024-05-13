@@ -1,0 +1,3 @@
+[submodule "outlier-robust-radar-odometry"]
+	path = outlier-robust-radar-odometry
+	url = git@github.com:url-kaist/outlier-robust-radar-odometry.git
