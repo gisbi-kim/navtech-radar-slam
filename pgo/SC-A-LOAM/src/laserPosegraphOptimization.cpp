@@ -224,7 +224,7 @@ void pubPath( void )
     // pub odom and path 
     nav_msgs::Odometry odomAftPGO;
     nav_msgs::Path pathAftPGO;
-    pathAftPGO.header.frame_id = "/camera_init";
+    pathAftPGO.header.frame_id = "odom";
     mKF.lock(); 
     for (int node_idx=0; node_idx < int(keyframePosesUpdated.size()) - 1; node_idx++) // -1 is just delayed visualization (because sometimes mutexed while adding(push_back) a new one)
     {
@@ -232,8 +232,8 @@ void pubPath( void )
         // const gtsam::Pose3& pose_est = isamCurrentEstimate.at<gtsam::Pose3>(node_idx);
 
         nav_msgs::Odometry odomAftPGOthis;
-        odomAftPGOthis.header.frame_id = "/camera_init";
-        odomAftPGOthis.child_frame_id = "/aft_pgo";
+        odomAftPGOthis.header.frame_id = "odom";
+        odomAftPGOthis.child_frame_id = "aft_pgo";
         odomAftPGOthis.header.stamp = ros::Time().fromSec(keyframeTimes.at(node_idx));
         odomAftPGOthis.pose.pose.position.x = pose_est.x;
         odomAftPGOthis.pose.pose.position.y = pose_est.y;
@@ -246,23 +246,24 @@ void pubPath( void )
         poseStampAftPGO.pose = odomAftPGOthis.pose.pose;
 
         pathAftPGO.header.stamp = odomAftPGOthis.header.stamp;
-        pathAftPGO.header.frame_id = "/camera_init";
+        pathAftPGO.header.frame_id = "odom";
         pathAftPGO.poses.push_back(poseStampAftPGO);
     }
     mKF.unlock(); 
     pubOdomAftPGO.publish(odomAftPGO); // last pose 
     pubPathAftPGO.publish(pathAftPGO); // poses 
 
-    static tf::TransformBroadcaster br;
-    tf::Transform transform;
-    tf::Quaternion q;
-    transform.setOrigin(tf::Vector3(odomAftPGO.pose.pose.position.x, odomAftPGO.pose.pose.position.y, odomAftPGO.pose.pose.position.z));
-    q.setW(odomAftPGO.pose.pose.orientation.w);
-    q.setX(odomAftPGO.pose.pose.orientation.x);
-    q.setY(odomAftPGO.pose.pose.orientation.y);
-    q.setZ(odomAftPGO.pose.pose.orientation.z);
-    transform.setRotation(q);
-    br.sendTransform(tf::StampedTransform(transform, odomAftPGO.header.stamp, "/camera_init", "/aft_pgo"));
+    // HT comment: this TF leads to a conflict with that in ORORA
+//    static tf::TransformBroadcaster br;
+//    tf::Transform transform;
+//    tf::Quaternion q;
+//    transform.setOrigin(tf::Vector3(odomAftPGO.pose.pose.position.x, odomAftPGO.pose.pose.position.y, odomAftPGO.pose.pose.position.z));
+//    q.setW(odomAftPGO.pose.pose.orientation.w);
+//    q.setX(odomAftPGO.pose.pose.orientation.x);
+//    q.setY(odomAftPGO.pose.pose.orientation.y);
+//    q.setZ(odomAftPGO.pose.pose.orientation.z);
+//    transform.setRotation(q);
+//    br.sendTransform(tf::StampedTransform(transform, odomAftPGO.header.stamp, "odom", "aft_pgo"));
 } // pubPath
 
 void updatePoses(void)
@@ -363,12 +364,12 @@ std::optional<gtsam::Pose3> doICPVirtualRelative( int _loop_kf_idx, int _curr_kf
     // loop verification 
     sensor_msgs::PointCloud2 cureKeyframeCloudMsg;
     pcl::toROSMsg(*cureKeyframeCloud, cureKeyframeCloudMsg);
-    cureKeyframeCloudMsg.header.frame_id = "/camera_init";
+    cureKeyframeCloudMsg.header.frame_id = "odom";
     pubLoopScanLocal.publish(cureKeyframeCloudMsg);
 
     sensor_msgs::PointCloud2 targetKeyframeCloudMsg;
     pcl::toROSMsg(*targetKeyframeCloud, targetKeyframeCloudMsg);
-    targetKeyframeCloudMsg.header.frame_id = "/camera_init";
+    targetKeyframeCloudMsg.header.frame_id = "odom";
     pubLoopSubmapLocal.publish(targetKeyframeCloudMsg);
 
     // ICP Settings
@@ -649,7 +650,7 @@ void pubMap(void)
 
     sensor_msgs::PointCloud2 laserCloudMapPGOMsg;
     pcl::toROSMsg(*laserCloudMapPGO, laserCloudMapPGOMsg);
-    laserCloudMapPGOMsg.header.frame_id = "/camera_init";
+    laserCloudMapPGOMsg.header.frame_id = "odom";
     pubMapAftPGO.publish(laserCloudMapPGOMsg);
 }
 
