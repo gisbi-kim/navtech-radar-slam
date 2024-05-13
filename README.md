@@ -23,9 +23,12 @@ Radar SLAM: [Outlier-robust radar odometry (ORORA)](https://arxiv.org/abs/2303.0
 First, clone and build.
 ```
 $ mkdir -p ~/catkin_radarslam/src && cd ~/catkin_radarslam/src
-$ git clone https://github.com/gisbi-kim/navtech-radar-slam.git && cd ..
+$ git clone https://github.com/gisbi-kim/navtech-radar-slam.git 
+$ cd navtech-radar-slam && git submodule init && git submodule update
+$ cd ../..
 $ catkin_make 
 ```
+
 Second, 
 - [Download a sequence from the MulRan dataset](https://sites.google.com/view/mulran-pr/download) (you need to download polar_oxford_form.zip) 
 - Change [this line in the yeti launch](https://github.com/gisbi-kim/navtech-radar-slam/blob/2921851c0735894d38998ca1a2057af2e8abbfd9/odometry/yeti_radar_odometry/launch/yeti_radar_odometry.launch#L4) to your downloaded and unzipped radar data directory path. 
