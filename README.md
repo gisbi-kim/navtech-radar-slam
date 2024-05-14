@@ -1,5 +1,24 @@
-# navtech-radar-slam
-Radar SLAM: [Outlier-robust radar odometry (ORORA)](https://arxiv.org/abs/2303.01876) + ScanContext-based Loop Closing 
+<div align="center">
+    <h1>Navtech-Radar-SLAM</h1>
+    <a href="https://github.com/gisbi-kim/navtech-radar-slam/tree/main"><img src="https://img.shields.io/badge/ROS-Noetic-blue" /></a>
+    <a href="https://github.com/gisbi-kim/navtech-radar-slam/tree/main"><img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" /></a>
+    <br />
+    <br />
+    <a href=https://www.youtube.com/watch?v=7ZMPtornIHA>Video</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href="https://github.com/gisbi-kim/navtech-radar-slam/tree/main?tab=readme-ov-file#steps">Install</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href=https://arxiv.org/abs/2303.01876>Paper (ORORA)</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href=https://ieeexplore.ieee.org/abstract/document/8593953>Paper (ScanContext)</a>
+  <br />
+  <br />
+  <p align="center"><img src=pic/ORORA_SLAM_GIF-ezgif.com-optimize-resized.gif alt="animated" /></p>
+</div>
+
+**ORORA-SLAM**: SLAM using [Outlier-robust radar odometry (ORORA)](https://arxiv.org/abs/2303.01876) + [ScanContext-based Loop Closing](https://ieeexplore.ieee.org/abstract/document/8593953)
+
+---
 
 ## What is Navtech-Radar-SLAM? 
 - In this repository, a (minimal) SLAM problem is defeind as **SLAM = Odometry + Loop closing**, and the optimized states are only robot poses along a trajectory.  
@@ -11,6 +30,8 @@ Radar SLAM: [Outlier-robust radar odometry (ORORA)](https://arxiv.org/abs/2303.0
         - The Scan Context-based loop detection is included in the file `pgo/SC-A-LOAM/laserPosegraphOptimization.cpp`.
     3. Pose-graph optimization
         - iSAM2 in GTSAM is used. See `pgo/SC-A-LOAM/laserPosegraphOptimization.cpp` for the details (ps. the implementation is eqaul to [SC-A-LOAM](https://github.com/gisbi-kim/SC-A-LOAM) and it means `laserPosegraphOptimization.cpp` node is generic!)
+         
+---
 
 ## How to use? 
 
@@ -20,7 +41,7 @@ Radar SLAM: [Outlier-robust radar odometry (ORORA)](https://arxiv.org/abs/2303.0
 - Code is tested on Ubuntu 20.04 with ROS Noetic.
 
 ### Steps 
-First, clone and build.
+First, clone and build. Note, there's a **submodule** in the repository.
 ```
 $ mkdir -p ~/catkin_radarslam/src && cd ~/catkin_radarslam/src
 $ git clone https://github.com/gisbi-kim/navtech-radar-slam.git 
@@ -49,18 +70,33 @@ $ roslaunch src/navtech-radar-slam/launch/navtech_radar_slam_mulran.launch seq_d
 - The examples are from [MulRan dataset](https://sites.google.com/view/mulran-pr/home), which is suitable to evaluate the radar odometry or SLAM algorithm in complex urban sites. 
     - The MulRan dataset provides the oxford-radar-robotcar-radar data format (i.e., meta data such as ray-wise timestamps are imbedded in an radar image, [see details here](https://oxford-robotics-institute.github.io/radar-robotcar-dataset/documentation#radar))
 
-### 1. KAIST 03 of MulRan dataset
+
+### 1. Recent Result in KAIST 03 of MulRan dataset
+
+<p align="center"><img src="pic/before_and_after_v2.png" width=700></p>
+
+### 2. KAIST 03 of MulRan dataset
 - [Video (youtube link)](https://www.youtube.com/watch?v=avtIQ8fesgU&t=107s)  
 - Capture:
     <p align="center"><img src="pic/example1.png" width=700></p>
 
-### 2. Riverside 03 of MulRan dataset 
+### 3. Riverside 03 of MulRan dataset 
 - [Video (youtube link)](https://youtu.be/-wVfbrtlRAI?t=301)  
 - Capture:
     <p align="center"><img src="pic/example2.png" width=700></p>
 
 ## Related papers 
 If you cite this repository, please consider below papers. 
+- [ORORA open source](https://github.com/keenan-burnett/yeti_radar_odometry) for radar odometry: 
+    ```
+    @INPROCEEDINGS { lim-2023-icra,
+        author = {Lim, Hyungtae and Han, Kawon and Shin, Gunhee and Kim, Giseop and Hong, Songcheol and Myung, Hyun},
+        title = { ORORA: Outlier-robust radar odometry },
+        booktitle = { Proceedings of the IEEE International Conference on Robotics and Automation (ICRA) },
+        pages={2046--2053},
+        year = { 2023 },
+    }
+    ```
 - [Yeti open source](https://github.com/keenan-burnett/yeti_radar_odometry) for radar odometry: 
     ```
     @ARTICLE{burnett_ral21,
