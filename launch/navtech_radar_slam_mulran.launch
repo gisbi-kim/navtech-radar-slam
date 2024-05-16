@@ -1,6 +1,11 @@
 <launch>
+    <arg name="seq_dir" default="/default/path/to/seq_dir" />
+    <arg name="do_slam" default="true" />
 
-    <include file="$(find yeti)/launch/yeti_radar_odometry.launch" />
+    <include file="$(find orora)/launch/run_orora.launch">
+        <arg name="seq_dir" value="$(arg seq_dir)" />
+        <arg name="do_slam" value="$(arg do_slam)" />
+    </include>
+    
     <include file="$(find sc_pgo)/launch/sc_pgo.launch" />
-
 </launch>
